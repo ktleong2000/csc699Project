@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 3987726368711304320}
   - component: {fileID: 8566386765436574144}
   - component: {fileID: 536753097491710444}
+  - component: {fileID: 1367324643973560553}
   m_Layer: 0
   m_Name: Kyle_B_V1
   m_TagString: Untagged
@@ -224,10 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -336,6 +337,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1367324643973560553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758860402836357108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac3f5158284d0c409e88daa8a88a4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s_inputreader: {fileID: 11400000, guid: 4e4a0c1ae3695a140842f2c23fd606bb, type: 2}
+  animator: {fileID: 536753097491710444}
 --- !u!1001 &1317560767109912123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,12 +431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681642b49d6bf9642b3e4286d41b41d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 0
-  SyncPositionY: 0
-  SyncPositionZ: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
   SyncRotAngleX: 1
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -466,12 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681642b49d6bf9642b3e4286d41b41d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 0
-  SyncPositionY: 0
-  SyncPositionZ: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
   SyncRotAngleX: 1
   SyncRotAngleY: 1
-  SyncRotAngleZ: 0
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
