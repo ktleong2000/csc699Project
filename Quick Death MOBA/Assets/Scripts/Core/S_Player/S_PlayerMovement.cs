@@ -23,6 +23,7 @@ public class S_PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner)
         {
+            // If not the owner, request ownership
             return;
         }
 
@@ -72,8 +73,8 @@ public class S_PlayerMovement : NetworkBehaviour
 
         rb.velocity = (UnityEngine.Vector2)bodyTransform.up * previousMovementInput.y * movementSpeed;
 
-        // Handle animation locally for the owner client
-        HandleAnimationLocally();
+        // Handle animation for the server and client
+        HandleAnimationServerRpc(isRotating, rb.velocity != UnityEngine.Vector2.zero);
     }
 
     private void HandleMove(UnityEngine.Vector2 movementInput)
@@ -107,18 +108,19 @@ public class S_PlayerMovement : NetworkBehaviour
         // Apply the same rotation on all clients to synchronize with the server
         bodyTransform.Rotate(xRotation, 0f, 0f);
 
-        if (xRotation != 0)
-        {
-            bodyTransform.Rotate(xRotation, 0f, 0f);
-            isRotating = true; // Set the flag to true while rotating
-        }
-        else
-        {
-            isRotating = false; // Set the flag to false when not rotating
-        }
+        // Set the flag based on the rotation
+        isRotating = (xRotation != 0);
     }
 
-    private void HandleAnimationLocally()
+    [ServerRpc]
+    private void HandleAnimationServerRpc(bool isRotating, bool isMoving)
+    {
+        // Synchronize animation to all clients
+        HandleAnimationClientRPC(isRotating, isMoving);
+    }
+
+    [ClientRpc]
+    private void HandleAnimationClientRPC(bool isRotating, bool isMoving)
     {
         if (isRotating)
         {
@@ -129,13 +131,6 @@ public class S_PlayerMovement : NetworkBehaviour
             animator.enabled = true; // Re-enable the animator when not rotating
         }
 
-        if (rb.velocity != UnityEngine.Vector2.zero)
-        {
-            animator.SetBool("IsMoving", true);
-        }
-        else
-        {
-            animator.SetBool("IsMoving", false);
-        }
+        animator.SetBool("IsMoving", isMoving);
     }
 }
