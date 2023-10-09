@@ -8,8 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ProductionScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+<<<<<<< HEAD
   - enabled: 0
     path: Assets/Brendan/PracticeScene.unity
+=======
+  - enabled: 1
+    path: Assets/Brendan/QMOBA_BV1.unity
+>>>>>>> 20095b41a707bf4c35c76818cffeffad873c95fb
     guid: 758e2b74bcbd59d40bfd2cda767db84a
   - enabled: 1
     path: Assets/Jonathan/PracticeScene 1.unity
