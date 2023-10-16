@@ -19,15 +19,18 @@ public class ApplicationController : MonoBehaviour
         if(isDedicatedServer){
 
         }else{
-            ClientSingleton clientSingleton = Instantiate(clientPrefab);
-
-            await clientSingleton.CreateClient();
-
             HostSingleton hostSingleton = Instantiate(hostPrefab);
 
             hostSingleton.CreateHost();
+
+            ClientSingleton clientSingleton = Instantiate(clientPrefab);
+
+            bool authenticated = await clientSingleton.CreateClient();
             
-            //Go to Main Menu
+            if(authenticated){
+                //Go to main menu
+                clientSingleton.GameManager.GoToMenu();
+            }
         }
     }
 
