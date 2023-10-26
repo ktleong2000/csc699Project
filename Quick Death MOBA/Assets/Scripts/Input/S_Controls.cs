@@ -53,6 +53,24 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""a014d156-526f-45fe-9fdb-474a624f000b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7bc91ee-bc77-4aad-bc0a-1cd39ae56eda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +205,28 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b845e0f-c069-4adb-8b98-213726309bcc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05c147c4-436b-4a9c-8764-627ae1518ebe"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -215,6 +255,8 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
         m_S_man_Move = m_S_man.FindAction("Move", throwIfNotFound: true);
         m_S_man_PrimaryFire = m_S_man.FindAction("Primary Fire", throwIfNotFound: true);
         m_S_man_Aim = m_S_man.FindAction("Aim", throwIfNotFound: true);
+        m_S_man_Ability1 = m_S_man.FindAction("Ability1", throwIfNotFound: true);
+        m_S_man_Ability2 = m_S_man.FindAction("Ability2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +321,8 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_S_man_Move;
     private readonly InputAction m_S_man_PrimaryFire;
     private readonly InputAction m_S_man_Aim;
+    private readonly InputAction m_S_man_Ability1;
+    private readonly InputAction m_S_man_Ability2;
     public struct S_manActions
     {
         private @S_Controls m_Wrapper;
@@ -286,6 +330,8 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_S_man_Move;
         public InputAction @PrimaryFire => m_Wrapper.m_S_man_PrimaryFire;
         public InputAction @Aim => m_Wrapper.m_S_man_Aim;
+        public InputAction @Ability1 => m_Wrapper.m_S_man_Ability1;
+        public InputAction @Ability2 => m_Wrapper.m_S_man_Ability2;
         public InputActionMap Get() { return m_Wrapper.m_S_man; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,6 +350,12 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Ability1.started += instance.OnAbility1;
+            @Ability1.performed += instance.OnAbility1;
+            @Ability1.canceled += instance.OnAbility1;
+            @Ability2.started += instance.OnAbility2;
+            @Ability2.performed += instance.OnAbility2;
+            @Ability2.canceled += instance.OnAbility2;
         }
 
         private void UnregisterCallbacks(IS_manActions instance)
@@ -317,6 +369,12 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Ability1.started -= instance.OnAbility1;
+            @Ability1.performed -= instance.OnAbility1;
+            @Ability1.canceled -= instance.OnAbility1;
+            @Ability2.started -= instance.OnAbility2;
+            @Ability2.performed -= instance.OnAbility2;
+            @Ability2.canceled -= instance.OnAbility2;
         }
 
         public void RemoveCallbacks(IS_manActions instance)
@@ -348,5 +406,7 @@ public partial class @S_Controls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnAbility1(InputAction.CallbackContext context);
+        void OnAbility2(InputAction.CallbackContext context);
     }
 }

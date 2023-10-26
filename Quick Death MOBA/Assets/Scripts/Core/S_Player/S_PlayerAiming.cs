@@ -10,6 +10,7 @@ public class S_PlayerAiming : NetworkBehaviour
     [SerializeField] private float rotationSpeed = 5f; // Adjust this value to control rotation speed.
 
     //private UnityEngine.Vector2 aimPosition;
+    private bool isRotating = false;
 
     public override void OnNetworkSpawn()
     {
@@ -43,21 +44,18 @@ public class S_PlayerAiming : NetworkBehaviour
         Vector2 directionToAim = aimWorldPosition - (Vector2)torsoTransform.position;
         float angle = Mathf.Atan2(directionToAim.y, directionToAim.x);
         float angleDegrees = angle * Mathf.Rad2Deg - 90;
-        
+
         // Apply the rotation to the model's torso transform.
         // You may need to adjust the local axis (e.g., Vector3.right) based on your model's orientation.
         HandleAimServerRPC(angleDegrees, 0f, 0f);
     }
 
-    // private void HandleAim(UnityEngine.Vector2 aim)
-    // {
-    //     aimPosition = aim;
-    // }
-
-
     [ServerRpc]
     private void HandleAimServerRPC(float angleDegreesX, float angleDegreesY, float angleDegreesZ)
     {
+        // Update the rotation on the server.
+        torsoTransform.localRotation = Quaternion.Euler(angleDegreesX, angleDegreesY, angleDegreesZ);
+
         // Call the client RPC to update the client's view.
         HandleAimClientRPC(angleDegreesX, angleDegreesY, angleDegreesZ);
     }
@@ -65,6 +63,7 @@ public class S_PlayerAiming : NetworkBehaviour
     [ClientRpc]
     private void HandleAimClientRPC(float angleDegreesX, float angleDegreesY, float angleDegreesZ)
     {
+
         // Update the client's view with the synchronized rotation.
         torsoTransform.localRotation = Quaternion.Euler(angleDegreesX, angleDegreesY, angleDegreesZ);
     }

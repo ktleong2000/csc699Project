@@ -9,6 +9,8 @@ using static S_Controls;
 public class S_InputReader : ScriptableObject, IS_manActions
 {
     public event Action<bool> PrimaryFireEvent;
+    public event Action<bool> Q_Ability;
+    public event Action<bool> E_Ability;
     public event Action<Vector2> MoveEvent;
 
     public Vector2 AimPosition {get; private set;}
@@ -37,5 +39,25 @@ public class S_InputReader : ScriptableObject, IS_manActions
     public void OnAim(InputAction.CallbackContext context)
     {
         AimPosition = context.ReadValue<Vector2>();
+    }
+
+    public void OnAbility1(InputAction.CallbackContext context)
+    {
+        //
+        if(context.performed){
+            Q_Ability?.Invoke(true);
+        }else if(context.canceled){
+            Q_Ability?.Invoke(false);
+        }
+    }
+
+    public void OnAbility2(InputAction.CallbackContext context)
+    {
+        //
+        if(context.performed){
+            E_Ability?.Invoke(true);
+        }else if(context.canceled){
+            E_Ability?.Invoke(false);
+        }
     }
 }

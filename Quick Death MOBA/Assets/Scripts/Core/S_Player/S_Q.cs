@@ -3,44 +3,42 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class S_Abilities : NetworkBehaviour
+public class S_Q : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private S_InputReader s_inputreader;
     [SerializeField] private Animator animator;
-    [SerializeField] private Collider2D playerCollider;
 
     [Header("Settings")]
-    [SerializeField] private float swingRate;
+    [SerializeField] private float QCooldown;
 
-
-    private bool shouldFire;
-    private float previousFireTime;
+    private bool shouldQ;
+    private float previousQTime;
     public override void OnNetworkSpawn()
     {
         if(!IsOwner){ return; }
 
-        s_inputreader.PrimaryFireEvent += HandlePrimaryFire;
+        s_inputreader.Q_Ability += HandleQ;
         animator = GetComponent<Animator>();
     }
     public override void OnNetworkDespawn()
     {
         if(!IsOwner){ return; }
 
-        s_inputreader.PrimaryFireEvent -= HandlePrimaryFire;
+        s_inputreader.Q_Ability -= HandleQ;
     }
     private void Update()
     {
         if (!IsOwner) return;
 
-        if (!shouldFire) return;
+        if (!shouldQ) return;
 
-        if(Time.time < (1/swingRate) + previousFireTime) {return;}
+        if(Time.time < (1/QCooldown) + previousQTime) {return;}
 
-        previousFireTime = Time.time;
+        previousQTime = Time.time;
 
-        Debug.Log("Setting IsSPriFire to true");
-        animator.SetBool("IsSPriFire", true);
+        Debug.Log("Setting IsSQ to true");
+        //animator.SetBool("IsSPriFire", true);
 
         // Use a Coroutine to wait for the animation to finish.
         StartCoroutine(WaitForAnimationEnd());
@@ -58,15 +56,13 @@ public class S_Abilities : NetworkBehaviour
             return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f && !animator.IsInTransition(0);
         });
 
-        Debug.Log("Animation finished. Setting IsSPriFire to false");
-        animator.SetBool("IsSPriFire", false);
+        Debug.Log("Animation finished. Setting IsSQ to false");
+        //animator.SetBool("IsSPriFire", false);
     }
 
-    private void HandlePrimaryFire(bool shouldFire)
+    private void HandleQ(bool shouldQ)
     {
-        this.shouldFire = shouldFire;
-        Debug.Log("PrimaryFire event: " + shouldFire);
+        this.shouldQ = shouldQ;
+        Debug.Log("Q event: " + shouldQ);
     }
-
-
 }
