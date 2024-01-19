@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Environment
+  - Collectibles
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Environment
+    uniqueID: 1072825095
+    locked: 0
+  - name: Collectibles
+    uniqueID: 3696027121
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

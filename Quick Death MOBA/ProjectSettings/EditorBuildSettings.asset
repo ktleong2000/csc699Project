@@ -5,16 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Brendan/NetBootstrap.unity
+  - enabled: 0
+    path: Assets/Brendan/Old Scenes/NetBootstrap.unity
     guid: 8e6bfeed1acc1b643a8857a728b3b8e1
-  - enabled: 1
-    path: Assets/Brendan/Main_Menu.unity
+  - enabled: 0
+    path: Assets/Brendan/Old Scenes/Main_Menu.unity
     guid: a9fccd03a38d0da40a825d35849dfdf8
-  - enabled: 1
-    path: Assets/Brendan/QMOBA_BV1.unity
+  - enabled: 0
+    path: Assets/Brendan/Old Scenes/QMOBA_BV1.unity
     guid: 758e2b74bcbd59d40bfd2cda767db84a
   - enabled: 0
     path: Assets/Scenes/ProductionScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/csc631Assets/csc631Scenes/Scenes/Main Menu.unity
+    guid: ce4b1140e8b5c3143829c5c2357f73c7
+  - enabled: 1
+    path: Assets/csc631Assets/csc631Scenes/Scenes/Game.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Brendan/New Scenes/QMOBA_BV1.unity
+    guid: 523c7f16df485c34aba7a9cef99425d6
   m_configObjects: {}
